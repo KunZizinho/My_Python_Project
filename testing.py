@@ -152,8 +152,7 @@ uniqueURLS = {}
 allURLS = []
 for line in lines:
     url = "https://"+line.split(",")[1]
-    # print(f"URL : {url}\n")
+    print(f"URL : {url}\n")
     uniqueURLS = True
     allURLS.append(url)
 print(f"Length : len(lines) {len(lines)} | len(allURLS) : {len(allURLS)}")
-print(lines, '\n', allURLS, '\n')
