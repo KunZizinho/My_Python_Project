@@ -1,28 +1,28 @@
 import requests
 from bs4 import BeautifulSoup
 
-x = requests.get('https://w3schools.com/python/demopage.htm')
-print(x.text)
-print(x.headers)
+# x = requests.get('https://w3schools.com/python/demopage.htm')
+# print(x.text)
+# print(x.headers)
 
         #  OR we can assignit to a variable and  do look thru dictionary (in Piyhon json file is considered a dictionary)
 
-headers = x.headers
-print(headers['X-Powered-By'])
-print(headers.get('Content-Length', -1))
+# headers = x.headers
+# print(headers['X-Powered-By'])
+# print(headers.get('Content-Length', -1))
 
         # we can also do it as an if statement in case the web page does not have certain header it will return a message that the header does not exsist
 
-if headers.get('Content-Length', None) is None:
-    print("we couldn't figure out what the webpage is powered by.")
+# if headers.get('Content-Length', None) is None:
+#     print("we couldn't figure out what the webpage is powered by.")
 
         # or we can do it thru try and catch 
 
-try:
-    print(headers['X-Powered-By'])
-except Exception as e:
-    print(f"Exception in getting header : {e}")  # f string helps us to formatstrings in py
-print(headers.get('Content-Length', -1))
+# try:
+#     print(headers['X-Powered-By'])
+# except Exception as e:
+    # print(f"Exception in getting header : {e}")  # f string helps us to formatstrings in py
+# print(headers.get('Content-Length', -1))
 
         #  helpful things to consider  is that thru developer tools we cal locate get req and copy it then go to curl trillworks which converts our copied request to the language we need it in
 print()
@@ -85,7 +85,7 @@ response = requests.get(url, headers=headers)
 soup = BeautifulSoup(response.text, 'html.parser')
 headers = response.headers
 print(f"title : {soup.title.string}")
-print(f"headers : {headers}")
+# print(f"headers : {headers}")
 
 try:
     print(headers['X-Powered-By'])
@@ -109,7 +109,7 @@ for url in urls:
         soup = BeautifulSoup(response.text, 'html.parser')
         headers = response.headers
         print(f"title : {soup.title.string}")
-        print(f"headers : {headers}")
+        # print(f"headers : {headers}")
         print(headers['X-Powered-By'])
     except Exception as e:
         print(f"Exception in getting header : {e}")
@@ -119,23 +119,37 @@ for url in urls:
 
     # Reading a csv file
 
-with open("top-100.csv", "r") as f:
-    data = f.read()
-lines = data.split("\n")
+# with open("top-100.csv", "r") as f:
+#     data = f.read()
+# lines = data.split("\n")
 # print('---line 124 start---', data, '\n---line 124 end---')
 # print('-------------------------125 start-----------------', lines, '-------------------------125 end-----------------\n', len(lines))
 
-for line in lines:
-    url = "https://"+line.split(",")[1]
-    print('--------line 130-----')
-    print(line.split(",")[1])
-    print()
-    try:
-        response = requests.get(url, cookies=cookies, headers=headers, timeout=5)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        headers = response.headers
-        print(f"title : {soup.title.string}\n")
+# for line in lines:
+    # url = "https://"+line.split(",")[1]
+    # print('--------line 130-----')
+    # print(line.split(",")[1])
+    # print()
+    # try:
+        # response = requests.get(url, cookies=cookies, headers=headers, timeout=5)
+        # soup = BeautifulSoup(response.text, 'html.parser')
+        # headers = response.headers
+        # print(f"title : {soup.title.string}\n")
         # print(f"headers : {headers}")
         # print(headers['X-Powered-By'])
-    except Exception as e:
-        print(f"Exception in getting header : {e}")
+    # except Exception as e:
+    #     print(f"Exception in getting header : {e}")
+print('-----------------line 144 ')
+
+with open("top-1m.csv", "r") as f:
+    data1M = f.read()
+lines = data1M.split("\n")
+
+uniqueURLS = {}
+allURLS = []
+for line in lines:
+    url = "https://"+line.split(",")[1]
+    # print(f"URL : {url}\n")
+    uniqueURLS = True
+    allURLS.append(url)
+print(f"Length : len(lines) {len(lines)} | len(uniqueURLS) : {len(uniqueURLS)} | len(allURLS) : {len(allURLS)}")
