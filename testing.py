@@ -120,7 +120,7 @@ for url in urls:
     # Reading a csv file
 
 # with open("top-100.csv", "r") as f:
-#     data = f.read()
+    # data = f.read()
 # lines = data.split("\n")
 # print('---line 124 start---', data, '\n---line 124 end---')
 # print('-------------------------125 start-----------------', lines, '-------------------------125 end-----------------\n', len(lines))
@@ -139,17 +139,20 @@ for url in urls:
         # print(headers['X-Powered-By'])
     # except Exception as e:
     #     print(f"Exception in getting header : {e}")
-print('-----------------line 144 ')
+print('-----------------line 144-------------')
 
-with open("top-1m.csv", "r") as f:
-    data1M = f.read()
-lines = data1M.split("\n")
+with open("top-100.csv", "r") as f:
+    # data1M = f.read()
+    data = f.read()
+# lines = data1M.split("\n")
+lines = data.split("\n")
+print(lines, '--------------------------------------147 end\n')
 
 uniqueURLS = {}
 allURLS = []
 for line in lines:
-    url = "https://"+line.split(",")[1]
-    # print(f"URL : {url}\n")
+    # url = "https://"+line.split(",")[1]
+    print(f"URL : {url}\n")
     uniqueURLS = True
     allURLS.append(url)
 print(f"Length : len(lines) {len(lines)} | len(uniqueURLS) : {len(uniqueURLS)} | len(allURLS) : {len(allURLS)}")
