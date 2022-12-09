@@ -122,4 +122,20 @@ for url in urls:
 with open("top-100.csv", "r") as f:
     data = f.read()
 lines = data.split("\n")
-print(data, '\n---line 124---')
+# print('---line 124 start---', data, '\n---line 124 end---')
+# print('-------------------------125 start-----------------', lines, '-------------------------125 end-----------------\n', len(lines))
+
+for line in lines:
+    url = "https://"+line.split(",")[1]
+    print('--------line 130-----')
+    print(line.split(",")[1])
+    print()
+    try:
+        response = requests.get(url, cookies=cookies, headers=headers, timeout=5)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        headers = response.headers
+        print(f"title : {soup.title.string}\n")
+        # print(f"headers : {headers}")
+        # print(headers['X-Powered-By'])
+    except Exception as e:
+        print(f"Exception in getting header : {e}")
