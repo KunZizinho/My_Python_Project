@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import tldextract
-
+import time
 import requests
 
 cookies = {
@@ -50,7 +50,8 @@ params = {
     'hl': 'en',
 }
 
-response = requests.get('https://ogs.google.com/u/0/widget/app', params=params, cookies=cookies, headers=headers)
+# response = requests.get('https://ogs.google.com/u/0/widget/app', params=params, cookies=cookies, headers=headers)
+startTime = time.time()
 
 with open("top-100.csv", "r") as f:
     data = f.read()
@@ -61,4 +62,13 @@ for line in lines:
     url = "https://"+line.split(",")[1]
     print(f"URL : {url}\n")
     new = tldextract.extract(url)
-print('\n', new)
+    print(new, '\n')
+    try:
+        response = requests.get(url, cookies=cookies, headers=headers, timeout=5)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        headers = response.headers
+        print(f"title : {soup.title.string}")
+    except Exception as e:
+        print(f"Exception in getting header : {e}")
+    
+print("---%s seconds ---" % (time.time() - startTime))
